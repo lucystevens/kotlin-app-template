@@ -2,23 +2,12 @@
 <configuration>
 
     <appender name="SLACK" class="com.github.maricn.logback.SlackAppender">
-        <!-- Slack API token -->
         <token>${SLACK_API_TOKEN}</token>
-        <!-- Slack incoming webhook uri. Uncomment the lines below to use incoming webhook uri instead of API token. -->
-        <!--
-        <webhookUri>https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX</webhookUri>
-        -->
-        <!-- Channel that you want to post - default is #general -->
         <channel>#kotlin-app-template</channel>
-        <!-- Formatting (you can use Slack formatting - URL links, code formatting, etc.) -->
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%-4relative [%thread] %-5level %class - %msg%n</pattern>
         </layout>
-        <!-- Username of the messages sender -->
-        <username>${HOSTNAME}</username>
-        <!-- Emoji to be used for messages -->
-        <iconEmoji>:stuck_out_tongue_winking_eye:</iconEmoji>
-        <!-- If color coding of log levels should be used -->
+        <username>Service Logging</username>
         <colorCoding>true</colorCoding>
     </appender>
 

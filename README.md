@@ -50,8 +50,13 @@ sudo chown deployer /services
 Set up SSH key access for the `deployer` user, you'll need this later.
 More detail can be found here: https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-20-04
 
-Setup user as sudoer for systemctl commands, and allow access to /etc/systemd/system directory.
-More details here: https://unix.stackexchange.com/questions/192706/how-could-we-allow-non-root-users-to-control-a-systemd-service
+Setup user as sudoer for systemctl commands.
+Add these lines to the `/etc/sudoers.d/deployer` file:
+```shell
+%deployer ALL= NOPASSWD: /bin/systemctl start kotlin-app-template
+%deployer ALL= NOPASSWD: /bin/systemctl stop kotlin-app-template
+%deployer ALL= NOPASSWD: /bin/systemctl restart kotlin-app-template
+```
 
 #### Setup application as service
 First ssh onto the server and create the service directory

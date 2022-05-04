@@ -18,7 +18,7 @@ class ExampleApiTest {
         exampleApi.helloWorld(ctx)
 
         // assert
-        verify { ctx.json("Hello World") }
+        verify { ctx.json("Hello, World") }
 
     }
 }
