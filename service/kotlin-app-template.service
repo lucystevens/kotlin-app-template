@@ -1,0 +1,14 @@
+[Unit]
+Description=kotlin-app-template
+
+[Service]
+User=service-deployer
+WorkingDirectory=/services/kotlin-app-template
+ExecStart=/services/kotlin-app-template/run
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
