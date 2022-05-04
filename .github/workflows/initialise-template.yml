@@ -1,0 +1,35 @@
+# Replaces certain templated strings on repo creation
+
+name: initialise-template
+
+on:
+  create:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v2
+
+      - name: Replace 'kotlin-app-template' with repo name
+        run: |
+          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' src/main/resources/logback.xml
+          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' docker-compose.yml
+          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' README.md
+          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' settings.gradle.kts
+          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' service/run
+          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' service/deploy.sh
+          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' service/kotlin-app-template.service
+          mv service/kotlin-app-template.service service/${{ github.event.repository.name }}.service
+
+      - name: Remove this workflow
+        run: rm -f .github/workflows/initialise-template.yml
+
+      - name: Commit template changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: Template setup for ${{ github.event.repository.name }}
