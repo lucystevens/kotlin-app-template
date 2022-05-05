@@ -142,6 +142,6 @@ Please make sure to update tests as appropriate.
 ## License
 [MIT][mit-license]
 
-[workflow-badge-main]: https://img.shields.io/github/workflow/status/lucystevens/kotlin-app-template/release/main?label=main
+[workflow-badge-main]: https://img.shields.io/github/workflow/status/lucystevens/kotlin-app-template/test/main?label=main
 [version-badge]: https://img.shields.io/github/v/release/lucystevens/kotlin-app-template
 [mit-license]: https://choosealicense.com/licenses/mit/
