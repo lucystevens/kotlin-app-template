@@ -2,7 +2,9 @@
 ![Version][version-badge]
 
 # kotlin-app-template
-A template repo for starting kotlin applications
+A template repo for starting kotlin applications.
+
+Remove `.github/workflows/initialise-template.yml` once created.
 
 ## Template features
 This repo contains boilerplate code for an API, with database access.
