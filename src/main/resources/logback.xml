@@ -14,21 +14,20 @@
     <appender name="SLACK-ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="SLACK" />
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
+            <level>INFO</level>
         </filter>
     </appender>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <encoder>
-                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
-            </encoder>
-        </layout>
+        <encoder>
+            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+        </encoder>
     </appender>
 
-    <root level="info">
-        <appender-ref ref="CONSOLE"/>
+    <logger level="INFO" name="uk.co.lucystevens"/>
+    <root level="WARN">
         <appender-ref ref="SLACK-ASYNC"/>
+        <appender-ref ref="CONSOLE" />
     </root>
 
 </configuration>

@@ -33,10 +33,6 @@ jobs:
           sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' docker-compose.yml
           sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' README.md
           sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' settings.gradle.kts
-          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' service/run
-          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' service/deploy.sh
-          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' service/kotlin-app-template.service
-          mv service/kotlin-app-template.service service/${{ github.event.repository.name }}.service
 
       - name: Commit template changes
         uses: stefanzweifel/git-auto-commit-action@v4

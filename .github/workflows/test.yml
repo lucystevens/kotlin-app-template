@@ -24,4 +24,10 @@ jobs:
           java-version: 11
 
       - name: Run tests
-        run: ./gradlew clean test integrationTest
+        run: ./gradlew clean test integrationTestWithDockerCompose
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: "build/test-results/**/*.xml"
