@@ -12,7 +12,7 @@ This repo contains boilerplate code for an API, with database access.
 ## Running
 Run locally using
 ```shell
-./gradlew run -Dlogback.configurationFile=src/test/resources/logback-test.xml
+./gradlew run
 ```
 
 ### Configuration

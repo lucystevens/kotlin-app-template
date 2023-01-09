@@ -29,7 +29,6 @@ jobs:
 
       - name: Replace 'kotlin-app-template' with repo name
         run: |
-          sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' src/main/resources/logback.xml
           sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' docker-compose.yml
           sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' README.md
           sed -i 's/kotlin-app-template/${{ github.event.repository.name }}/' settings.gradle.kts

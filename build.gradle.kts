@@ -17,7 +17,7 @@ repositories {
 }
 
 group = "uk.co.lucystevens"
-version = "0.0.2"
+version = "0.0.3"
 
 sourceSets {
     create("integrationTest") {
@@ -30,10 +30,10 @@ val integrationTestImplementation: Configuration by configurations.getting {
     extendsFrom(configurations.testImplementation.get())
 }
 
-val ktormVersion = "3.4.1"
-val koinVersion= "3.1.6"
+val ktormVersion = "3.5.0"
+val koinVersion= "3.3.2"
 val dockerJavaVersion = "3.2.13"
-val jacksonVersion = "2.13.1"
+val jacksonVersion = "2.14.0"
 
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -43,24 +43,23 @@ dependencies {
     // ktorm for database connections
     implementation("org.ktorm:ktorm-core:$ktormVersion")
     implementation("org.ktorm:ktorm-support-postgresql:$ktormVersion")
-    implementation("org.postgresql:postgresql:42.3.4")
+    implementation("org.postgresql:postgresql:42.5.1")
 
     // javalin + jackson for API server
-    implementation("io.javalin:javalin:4.5.0")
+    implementation("io.javalin:javalin:5.3.0")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
 
     // okhttp for API requests
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
     // logback for logging
-    implementation("ch.qos.logback:logback-classic:1.2.11")
-    implementation("com.github.maricn:logback-slack-appender:1.6.1")
+    implementation("ch.qos.logback:logback-classic:1.4.5")
 
     // testing
     testImplementation(kotlin("test"))
-    testImplementation("io.mockk:mockk:1.12.3")
+    testImplementation("io.mockk:mockk:1.13.2")
 }
 
 application {

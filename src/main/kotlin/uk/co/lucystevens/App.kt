@@ -3,11 +3,15 @@ package uk.co.lucystevens
 import uk.co.lucystevens.cli.AppRunner
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import uk.co.lucystevens.api.RouteController
 
-class App(private val args: Array<String>) : KoinComponent {
-    private val appRunner by inject<AppRunner>()
+class App : KoinComponent {
+    private val routeController by inject<RouteController>()
+
+    private val logger = logger<AppRunner>()
 
     fun run(){
-        appRunner.run(args.toList())
+        logger.info("Starting app")
+        routeController.start()
     }
 }

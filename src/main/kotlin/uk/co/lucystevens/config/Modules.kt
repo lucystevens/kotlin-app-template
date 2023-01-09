@@ -1,6 +1,5 @@
 package uk.co.lucystevens.config
 
-import uk.co.lucystevens.cli.AppRunner
 import org.koin.dsl.module
 import org.ktorm.database.Database
 import org.ktorm.support.postgresql.PostgreSqlDialect
@@ -15,7 +14,6 @@ import kotlin.random.Random
 object Modules {
 
     private val utils = module {
-        single { AppRunner(get()) }
         single { Config() }
         single<Clock> { Clock.systemDefaultZone() }
         single<Random> { Random.Default }
