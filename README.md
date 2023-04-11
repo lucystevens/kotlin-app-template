@@ -37,102 +37,16 @@ To run integration tests:
 ./gradlew integrationTest
 ```
 
-## Deploying as a service
-### First time server setup
-Before deploying the application to a server automatically, some initial manual setup needs to be done:
-
-#### Setup deployer user
-As root, create the `deployer` user and services directory if they don't exist
-```shell
-adduser deployer
-sudo mkdir /services
-sudo chown deployer /services
-```
-
-Set up SSH key access for the `deployer` user, you'll need this later.
-More detail can be found here: https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-20-04
-
-Setup user as sudoer for systemctl commands.
-Add these lines to the `/etc/sudoers.d/deployer` file:
-```shell
-%deployer ALL= NOPASSWD: /bin/systemctl start kotlin-app-template
-%deployer ALL= NOPASSWD: /bin/systemctl stop kotlin-app-template
-%deployer ALL= NOPASSWD: /bin/systemctl restart kotlin-app-template
-```
-
-#### Setup application as service
-First ssh onto the server and create the service directory
-```shell
-ssh deployer@server
-mkdir /services/kotlin-app-template
-```
-
-Logout, and copy files over to the server
-```shell
-scp service/* deployer@server:/services/kotlin-app-template
-```
-
-Log back in and install as a service
-```shell
-ssh deployer@server
-
-touch /services/kotlin-app-template/version
-chmod +x /services/kotlin-app-template/run
-chmod +x /services/kotlin-app-template/deploy.sh
-
-sudo cp /services/kotlin-app-template/kotlin-app-template.service /etc/systemd/system/
-sudo systemctl daemon-reload
-```
-
-### Release workflow
+## Releasing
 Once the initial setup is complete, deployments will be triggered automatically via the release workflow:
 Tagging a commit with a semantic version (e.g. vx.x.x) will start the workflow. 
-This will build the application, create a GitHub release, and deploy it as a service.
+This will build the application, create a GitHub release and docker image, and deploy it to the server.
 
 This release workflow requires some secrets to be defined:
  - `HOST` - The IP for the host server to deploy to
  - `SSH_KEY` - The content of the SSH key for the `deployer` user
  - `SSH_PASSPHRASE` - The passphrase to decrypt the ssh key
-
-
-## Deploying as a Docker container
-Services deployed as a Docker container are not quite as seamless as those deployed as a service, and require some additional
-manual steps. There is also some initial set up work to be done if the server has not yet been used for Docker applications.
-
-### First time server setup
-As root, create the `docker` user
-```shell
-adduser docker
-```
-
-Install Docker, using this guide: https://docs.docker.com/engine/install/ubuntu/
-Then add the `docker` user to the `docker` group
-```shell
-sudo groupadd docker
-sudo usermod -aG docker docker
-```
-
-### Release workflow
-Tagging a commit with a semantic version (e.g. vx.x.x) will start the workflow.
-This will build the application, create a GitHub release, and push a tagged Docker image to the central repository.
-
-This release workflow requires some secrets to be defined:
-- `DOCKERHUB_TOKEN` - The secret token for the Dockerhub account the image is being pushed to
-
-### Updating the running application
-Once the new image has been pushed by the step above, you can update the running container.
-You should be logged in as the `docker` user created above for these steps.
-
-If running, stop the existing container and remove it
-```shell
-docker stop kotlin-app-template
-docker rm kotlin-app-template
-```
-
-Run the new container, remembering to define any necessary environment variables and the exposed port:
-```shell
-docker run -d -p PORT:7000 --env-file kotlin-app-template.env lucystevens/kotlin-app-template:latest
-```
+ - `DOCKERHUB_TOKEN` - The secret token for the Dockerhub account the image is being pushed to
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

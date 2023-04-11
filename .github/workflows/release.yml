@@ -8,9 +8,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 env:
-  GH_USER: lucystevens
   DOCKERHUB_USERNAME: lucystevens
-  PROJECT_NAME: brewery-api
 
 jobs:
   build:
